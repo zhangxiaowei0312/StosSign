@@ -7,7 +7,7 @@
 
 
 import Foundation
-import CCoreCrypto
+import CoreCrypto
 #if os(macOS) || os(iOS)
 import UIKit
 #endif
@@ -67,24 +67,16 @@ public class GSAContext {
     private(set) var derivedPasswordKey: Data?
     private(set) var verificationMessage: Data?
     
-    private let srpGroup = ccsrp_gp_rfc5054_2048()
+    private let srpGroup = ccsrp_gp_rfc5054_2048()!
     private let digestInfo = ccsha256_di()!
     
     private lazy var srpContext: ccsrp_ctx_t = {
         let size = ccsrp_sizeof_srp(self.digestInfo, self.srpGroup)
-        let context = UnsafeMutableRawPointer.allocate(
-            byteCount: size,
-            alignment: MemoryLayout<UInt8>.alignment
-        ).assumingMemoryBound(to: ccsrp_ctx_t.self)
-        
-        ccsrp_ctx_init(context.pointee, self.digestInfo, self.srpGroup)
-        ccsrp_client_set_noUsernameInX(context.pointee, true)
-        
-        withUnsafeMutablePointer(to: &context.pointee._full.pointee) { ptr in
-            ptr.pointee.hdr.blinding_rng = ccrng(nil)
-        }
-        
-        return context.pointee
+        let context = UnsafeMutableRawPointer.allocate(byteCount: size, alignment: MemoryLayout<UInt8>.alignment).assumingMemoryBound(to: ccsrp_ctx.self)
+        ccsrp_ctx_init(context, self.digestInfo, self.srpGroup)
+        ccsrp_client_set_noUsernameInX(context, true)
+        context.pointee.blinding_rng = ccrng(nil)
+        return context
     }()
     
     init(username: String, password: String) {

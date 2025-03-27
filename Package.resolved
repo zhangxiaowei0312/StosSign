@@ -1,15 +1,25 @@
 {
-  "originHash" : "c30bafd1140c8e932a4eb7e0233b710a0f7fa93aa8aa59a756e1bcbee7a64f91",
-  "pins" : [
-    {
-      "identity" : "zsign-ios",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/zwsn/zsign-ios.git",
-      "state" : {
-        "branch" : "main",
-        "revision" : "a7f275fb4830ea48adf536fcddee7d05471970d0"
+  "object": {
+    "pins": [
+      {
+        "package": "CoreCrypto",
+        "repositoryURL": "https://github.com/MartinLau7/CoreCrypto-SPM",
+        "state": {
+          "branch": "master",
+          "revision": "2be6d45eb32c0057cb680cb5789b825eac0c0798",
+          "version": null
+        }
+      },
+      {
+        "package": "ZSignApple",
+        "repositoryURL": "https://github.com/zwsn/zsign-ios.git",
+        "state": {
+          "branch": "main",
+          "revision": "a7f275fb4830ea48adf536fcddee7d05471970d0",
+          "version": null
+        }
       }
-    }
-  ],
-  "version" : 3
+    ]
+  },
+  "version": 1
 }
