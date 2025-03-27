@@ -18,6 +18,8 @@ public class AppleAPI {
     let qhURL = URL(string: "https://developerservices2.apple.com/services/\(QH_Protocol)/")!
     let v1URL = URL(string: "https://developerservices2.apple.com/services/\(V1_Protocol)/")!
     
+    public init() {}
+    
     public func fetchTeamsForAccount(account: Account, session: AppleAPISession, completion: @escaping ([Team]?, Error?) -> Void) {
         let url = qhURL.appendingPathComponent("listTeams.action")
         
