@@ -7,14 +7,14 @@
 
 import Foundation
 
-enum DeviceType: Int {
+public enum DeviceType: Int {
     case iPhone = 1
     case iPad = 2
     case AppleTV = 3
     case none = 0
     case all = 7
     
-    static func from(uiDeviceFamily deviceFamily: Int) -> DeviceType {
+    public static func from(uiDeviceFamily deviceFamily: Int) -> DeviceType {
         switch deviceFamily {
         case 1: return .iPhone
         case 2: return .iPad
@@ -23,7 +23,7 @@ enum DeviceType: Int {
         }
     }
     
-    static func combine(_ lhs: DeviceType, _ rhs: DeviceType) -> DeviceType {
+    public static func combine(_ lhs: DeviceType, _ rhs: DeviceType) -> DeviceType {
         return DeviceType(rawValue: lhs.rawValue | rhs.rawValue) ?? .none
     }
 }
@@ -40,7 +40,7 @@ public struct Device: Codable {
         case deviceClass
     }
     
-    init(name: String, identifier: String, type: DeviceType) {
+    public init(name: String, identifier: String, type: DeviceType) {
         self.name = name
         self.identifier = identifier
         self.type = type
@@ -65,7 +65,7 @@ public struct Device: Codable {
         }
     }
     
-    static func operatingSystemNameForDeviceType(_ deviceType: DeviceType) -> String? {
+    public static func operatingSystemNameForDeviceType(_ deviceType: DeviceType) -> String? {
         switch deviceType {
         case .iPhone, .iPad:
             return "iOS"
@@ -77,7 +77,7 @@ public struct Device: Codable {
     }
 
     
-    static func operatingSystemVersionFromString(_ osVersionString: String) -> OperatingSystemVersion {
+    public static func operatingSystemVersionFromString(_ osVersionString: String) -> OperatingSystemVersion {
         let versionComponents = osVersionString.split(separator: ".").map { Int($0) ?? 0 }
         let majorVersion = versionComponents.count > 0 ? versionComponents[0] : 0
         let minorVersion = versionComponents.count > 1 ? versionComponents[1] : 0
@@ -86,7 +86,7 @@ public struct Device: Codable {
         return OperatingSystemVersion(majorVersion: majorVersion, minorVersion: minorVersion, patchVersion: patchVersion)
     }
 
-    static func stringFromOperatingSystemVersion(_ osVersion: OperatingSystemVersion) -> String {
+    public static func stringFromOperatingSystemVersion(_ osVersion: OperatingSystemVersion) -> String {
         var versionString = "\(osVersion.majorVersion).\(osVersion.minorVersion)"
         if osVersion.patchVersion != 0 {
             versionString += ".\(osVersion.patchVersion)"

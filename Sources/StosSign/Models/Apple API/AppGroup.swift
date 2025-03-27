@@ -12,7 +12,7 @@ public struct AppGroup: Codable {
     var identifier: String
     var groupIdentifier: String
     
-    init(name: String, identifier: String, groupIdentifier: String) {
+    public init(name: String, identifier: String, groupIdentifier: String) {
         self.name = name
         self.identifier = identifier
         self.groupIdentifier = groupIdentifier

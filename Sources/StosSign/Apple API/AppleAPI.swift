@@ -18,7 +18,7 @@ public class AppleAPI {
     let qhURL = URL(string: "https://developerservices2.apple.com/services/\(QH_Protocol)/")!
     let v1URL = URL(string: "https://developerservices2.apple.com/services/\(V1_Protocol)/")!
     
-    func fetchTeamsForAccount(account: Account, session: AppleAPISession, completion: @escaping ([Team]?, Error?) -> Void) {
+    public func fetchTeamsForAccount(account: Account, session: AppleAPISession, completion: @escaping ([Team]?, Error?) -> Void) {
         let url = qhURL.appendingPathComponent("listTeams.action")
         
         sendRequestWithURL(requestURL: url, additionalParameters: nil, session: session, team: nil) { response, error in
@@ -62,7 +62,7 @@ public class AppleAPI {
     }
     
     
-    func fetchDevicesForTeam(team: Team, session: AppleAPISession, types: DeviceType, completion: @escaping ([Device]?, Error?) -> Void) {
+    public func fetchDevicesForTeam(team: Team, session: AppleAPISession, types: DeviceType, completion: @escaping ([Device]?, Error?) -> Void) {
         let url = qhURL.appendingPathComponent("ios").appendingPathComponent("listDevices.action")
         
         self.sendRequestWithURL(requestURL: url, additionalParameters: nil, session: session, team: team) { response, error in
@@ -102,7 +102,7 @@ public class AppleAPI {
         }
     }
     
-    func registerDeviceWithName(name: String, identifier: String, type: DeviceType, team: Team, session: AppleAPISession, completion: @escaping (Device?, Error?) -> Void) {
+    public func registerDeviceWithName(name: String, identifier: String, type: DeviceType, team: Team, session: AppleAPISession, completion: @escaping (Device?, Error?) -> Void) {
         let url = qhURL.appendingPathComponent("ios").appendingPathComponent("addDevice.action")
         
         var parameters = [
@@ -178,7 +178,7 @@ public class AppleAPI {
         }
     }
     
-    func fetchCertificatesForTeam(team: Team, session: AppleAPISession, completion: @escaping ([Certificate]?, Error?) -> Void) {
+    public func fetchCertificatesForTeam(team: Team, session: AppleAPISession, completion: @escaping ([Certificate]?, Error?) -> Void) {
         let url = v1URL.appendingPathComponent("certificates")
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
@@ -198,7 +198,7 @@ public class AppleAPI {
         }
     }
     
-    func addCertificateWithMachineName(machineName: String, team: Team, session: AppleAPISession, completion: @escaping (Certificate?, Error?) -> Void) {
+    public func addCertificateWithMachineName(machineName: String, team: Team, session: AppleAPISession, completion: @escaping (Certificate?, Error?) -> Void) {
         guard let certificateRequest = CertificateRequest.generate(), let csr = certificateRequest.csr else {
             completion(nil, AppleAPIError.invalidCertificateRequest)
             return
@@ -224,7 +224,7 @@ public class AppleAPI {
                            }
     }
     
-    func revokeCertificate(certificate: Certificate, team: Team, session: AppleAPISession, completion: @escaping (Bool, Error?) -> Void) {
+    public func revokeCertificate(certificate: Certificate, team: Team, session: AppleAPISession, completion: @escaping (Bool, Error?) -> Void) {
         let url = v1URL.appendingPathComponent("certificates").appendingPathComponent(certificate.identifier ?? "")
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
@@ -234,7 +234,7 @@ public class AppleAPI {
         }
     }
     
-    func fetchAppIDsForTeam(team: Team, session: AppleAPISession, completionHandler: @escaping ([AppID]?, Error?) -> Void) {
+    public func fetchAppIDsForTeam(team: Team, session: AppleAPISession, completionHandler: @escaping ([AppID]?, Error?) -> Void) {
         let url = qhURL.appendingPathComponent("ios/listAppIds.action")
         
         sendRequestWithURL(requestURL: url, additionalParameters: nil, session: session, team: team) { response, error in
@@ -254,7 +254,7 @@ public class AppleAPI {
         }
     }
     
-    func addAppID(name: String, bundleIdentifier: String, team: Team, session: AppleAPISession, completionHandler: @escaping (AppID?, Error?) -> Void) {
+    public func addAppID(name: String, bundleIdentifier: String, team: Team, session: AppleAPISession, completionHandler: @escaping (AppID?, Error?) -> Void) {
         let url = qhURL.appendingPathComponent("ios/addAppId.action")
         
         // Sanitize name similar to ObjC implementation
@@ -311,7 +311,7 @@ public class AppleAPI {
         }
     }
     
-    func updateAppID(_ appID: AppID, team: Team, session: AppleAPISession, completionHandler: @escaping (AppID?, Error?) -> Void) {
+    public func updateAppID(_ appID: AppID, team: Team, session: AppleAPISession, completionHandler: @escaping (AppID?, Error?) -> Void) {
         let url = qhURL.appendingPathComponent("ios/updateAppId.action")
         
         var parameters: [String: Any] = ["appIdId": appID.identifier]
@@ -367,7 +367,7 @@ public class AppleAPI {
         }
     }
     
-    func deleteAppID(_ appID: AppID, team: Team, session: AppleAPISession, completionHandler: @escaping (Bool, Error?) -> Void) {
+    public func deleteAppID(_ appID: AppID, team: Team, session: AppleAPISession, completionHandler: @escaping (Bool, Error?) -> Void) {
         let url = qhURL.appendingPathComponent("ios/deleteAppId.action")
         
         let parameters = ["appIdId": appID.identifier]
@@ -397,7 +397,7 @@ public class AppleAPI {
     
     // MARK: - App Groups
     
-    func fetchAppGroupsForTeam(team: Team, session: AppleAPISession, completionHandler: @escaping ([AppGroup]?, Error?) -> Void) {
+    public func fetchAppGroupsForTeam(team: Team, session: AppleAPISession, completionHandler: @escaping ([AppGroup]?, Error?) -> Void) {
         let url = qhURL.appendingPathComponent("ios/listApplicationGroups.action")
         
         sendRequestWithURL(requestURL: url, additionalParameters: nil, session: session, team: team) { response, error in
@@ -420,7 +420,7 @@ public class AppleAPI {
         }
     }
     
-    func addAppGroup(name: String, groupIdentifier: String, team: Team, session: AppleAPISession, completionHandler: @escaping (AppGroup?, Error?) -> Void) {
+    public func addAppGroup(name: String, groupIdentifier: String, team: Team, session: AppleAPISession, completionHandler: @escaping (AppGroup?, Error?) -> Void) {
         let url = qhURL.appendingPathComponent("ios/addApplicationGroup.action")
         
         let parameters = [
@@ -460,7 +460,7 @@ public class AppleAPI {
         }
     }
     
-    func assignAppID(_ appID: AppID, toGroups groups: [AppGroup], team: Team, session: AppleAPISession, completionHandler: @escaping (Bool, Error?) -> Void) {
+    public func assignAppID(_ appID: AppID, toGroups groups: [AppGroup], team: Team, session: AppleAPISession, completionHandler: @escaping (Bool, Error?) -> Void) {
         let url = qhURL.appendingPathComponent("ios/assignApplicationGroupToAppId.action")
         
         let groupIDs = groups.map { $0.identifier }
@@ -494,7 +494,7 @@ public class AppleAPI {
         }
     }
     
-    func fetchProvisioningProfileForAppID(appID: AppID, deviceType: DeviceType, team: Team, session: AppleAPISession, completionHandler: @escaping (ProvisioningProfile?, Error?) -> Void) {
+    public func fetchProvisioningProfileForAppID(appID: AppID, deviceType: DeviceType, team: Team, session: AppleAPISession, completionHandler: @escaping (ProvisioningProfile?, Error?) -> Void) {
         let url = qhURL.appendingPathComponent("ios/downloadTeamProvisioningProfile.action")
         
         var parameters: [String: String] = ["appIdId": appID.identifier]
@@ -537,7 +537,7 @@ public class AppleAPI {
     }
     
     
-    func deleteProvisioningProfile(_ provisioningProfile: ProvisioningProfile, team: Team, session: AppleAPISession, completionHandler: @escaping (Bool, Error?) -> Void) {
+    public func deleteProvisioningProfile(_ provisioningProfile: ProvisioningProfile, team: Team, session: AppleAPISession, completionHandler: @escaping (Bool, Error?) -> Void) {
         let url = qhURL.appendingPathComponent("ios/deleteProvisioningProfile.action")
         
         let parameters = [
@@ -570,7 +570,7 @@ public class AppleAPI {
     }
     
     
-    func sendServicesRequest(originalRequest: URLRequest, additionalParameters: [String: String]? = nil, session: AppleAPISession,team: Team, completion: @escaping ([String: Any]?, Error?) -> Void) {
+    public func sendServicesRequest(originalRequest: URLRequest, additionalParameters: [String: String]? = nil, session: AppleAPISession,team: Team, completion: @escaping ([String: Any]?, Error?) -> Void) {
         var request = originalRequest
         
         var queryItems = [URLQueryItem(name: "teamId", value: team.identifier)]
@@ -654,7 +654,7 @@ public class AppleAPI {
     }
     
     
-    func sendRequestWithURL(requestURL: URL, additionalParameters: [String: String]?, session: AppleAPISession, team: Team?, completion: @escaping ([String: Any]?, Error?) -> Void) {
+    public func sendRequestWithURL(requestURL: URL, additionalParameters: [String: String]?, session: AppleAPISession, team: Team?, completion: @escaping ([String: Any]?, Error?) -> Void) {
         var parameters: [String: String] = [
             "clientId": clientID,
             "protocolVersion": QH_Protocol, // v1 Protocol is newer
@@ -733,7 +733,7 @@ public class AppleAPI {
         }
     }
     
-    func authenticate(
+    public func authenticate(
         appleID unsanitizedAppleID: String,
         password: String,
         anisetteData: AnisetteData,
@@ -964,7 +964,7 @@ public class AppleAPI {
         }
     }
     
-    func sendAuthenticationRequest(
+    public func sendAuthenticationRequest(
         parameters requestParameters: [String: Any],
         anisetteData: AnisetteData,
         completionHandler: @escaping (Result<[String: Any], Error>) -> Void
@@ -1043,7 +1043,7 @@ public class AppleAPI {
         }
     }
     
-    func makeTwoFactorCodeRequest(
+    public func makeTwoFactorCodeRequest(
         url: URL,
         dsid: String,
         idmsToken: String,

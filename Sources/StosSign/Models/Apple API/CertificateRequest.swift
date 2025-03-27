@@ -9,7 +9,7 @@ import Foundation
 import StosOpenSSL
 
 public class CertificateRequest {
-    static func generate() -> (csr: Data?, privateKey: Data?)? {
+    public static func generate() -> (csr: Data?, privateKey: Data?)? {
         var outputRequest: UnsafeMutablePointer<UInt8>? = nil
         var requestLength: Int = 0
         var outputPrivateKey: UnsafeMutablePointer<UInt8>? = nil

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum TeamType: Int, Codable {
+public enum TeamType: Int, Codable {
     case unknown
     case free
     case individual
@@ -21,14 +21,14 @@ public struct Team {
     var type: TeamType
     var account: Account
     
-    init(name: String, identifier: String, type: TeamType, account: Account) {
+    public init(name: String, identifier: String, type: TeamType, account: Account) {
         self.name = name
         self.identifier = identifier
         self.type = type
         self.account = account
     }
     
-    init?(account: Account, responseDictionary: [String: Any]) {
+    public init?(account: Account, responseDictionary: [String: Any]) {
         guard let name = responseDictionary["name"] as? String,
               let identifier = responseDictionary["teamId"] as? String,
               let teamType = responseDictionary["type"] as? String else {

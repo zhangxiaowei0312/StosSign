@@ -20,13 +20,13 @@ public class Certificate {
     private static let pemPrefix = "-----BEGIN CERTIFICATE-----"
     private static let pemSuffix = "-----END CERTIFICATE-----"
     
-    init(name: String, serialNumber: String, data: Data?) {
+    public init(name: String, serialNumber: String, data: Data?) {
         self.name = name
         self.serialNumber = serialNumber
         self.data = data
     }
     
-    convenience init?(p12Data: Data, password: String? = nil) {
+    public convenience init?(p12Data: Data, password: String? = nil) {
         let passwordCString = password?.cString(using: .utf8)
         var certData: UnsafeMutablePointer<UInt8>? = nil
         var certLength: size_t = 0
@@ -58,7 +58,7 @@ public class Certificate {
         self.privateKey = privateKeyData
     }
     
-    convenience init?(data: Data) {
+    public convenience init?(data: Data) {
         var name: UnsafeMutablePointer<CChar>? = nil
         var nameLength: size_t = 0
         var serialNumber: UnsafeMutablePointer<CChar>? = nil
@@ -87,7 +87,7 @@ public class Certificate {
         self.init(name: nameString, serialNumber: serialNumberString, data: data)
     }
     
-    convenience init?(responseDictionary: [String: Any]) {
+    public convenience init?(responseDictionary: [String: Any]) {
         let identifier = responseDictionary["id"] as? String
         
         let attributesDictionary = responseDictionary["attributes"] as? [String: Any] ?? responseDictionary
@@ -99,9 +99,9 @@ public class Certificate {
             data = Data(base64Encoded: encodedData)
         }
         
-        var machineName = attributesDictionary["machineName"] as? String
+        let machineName = attributesDictionary["machineName"] as? String
         
-        var machineIdentifier = attributesDictionary["machineId"] as? String
+        let machineIdentifier = attributesDictionary["machineId"] as? String
         
         if let certData = data {
             self.init(data: certData)
@@ -118,11 +118,11 @@ public class Certificate {
         self.identifier = identifier
     }
     
-    var p12Data: Data? {
+    public var p12Data: Data? {
         return encryptedP12Data(password: "")
     }
     
-    func encryptedP12Data(password: String) -> Data? {
+    public func encryptedP12Data(password: String) -> Data? {
         guard let certData = self.data, let privateKeyData = self.privateKey else {
             return nil
         }
@@ -160,11 +160,11 @@ public class Certificate {
     }
     
     // MARK: - Equatable and Hashable
-    static func == (lhs: Certificate, rhs: Certificate) -> Bool {
+    public static func == (lhs: Certificate, rhs: Certificate) -> Bool {
         return lhs.serialNumber == rhs.serialNumber
     }
     
-    func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
         hasher.combine(serialNumber)
     }
 }
