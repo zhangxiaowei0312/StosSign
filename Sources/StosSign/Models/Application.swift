@@ -19,7 +19,7 @@ public class ALTApplication: NSObject {
     
     public let name: String
     public let bundleIdentifier: String
-    public  let version: String
+    public let version: String
     public let buildVersion: String
     public let minimumiOSVersion: OperatingSystemVersion
     public let supportedDeviceTypes: DeviceType
