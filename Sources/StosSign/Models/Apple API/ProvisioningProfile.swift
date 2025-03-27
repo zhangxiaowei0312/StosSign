@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ProvisioningProfile: Codable {
+public struct ProvisioningProfile: Codable {
     var identifier: String
     var data: Data
     var name: String
@@ -38,7 +38,7 @@ struct ProvisioningProfile: Codable {
         case certificates = "DeveloperCertificates"
     }
 
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
         identifier = try container.decode(String.self, forKey: .identifier)

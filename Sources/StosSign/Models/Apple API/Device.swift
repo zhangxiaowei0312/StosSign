@@ -28,7 +28,7 @@ enum DeviceType: Int {
     }
 }
 
-struct Device: Codable {
+public struct Device: Codable {
     var name: String
     var identifier: String
     var type: DeviceType
@@ -46,7 +46,7 @@ struct Device: Codable {
         self.type = type
     }
     
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         name = try container.decode(String.self, forKey: .name)
@@ -94,7 +94,7 @@ struct Device: Codable {
         return versionString
     }
     
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         
         try container.encode(name, forKey: .name)

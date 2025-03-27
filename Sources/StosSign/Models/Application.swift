@@ -14,8 +14,7 @@ import UIKit
 
 typealias Entitlement = String
 
-/// Represents an iOS application and its metadata
-final class ALTApplication: NSObject {
+public class ALTApplication: NSObject {
     // MARK: - Public Properties
     
     let name: String

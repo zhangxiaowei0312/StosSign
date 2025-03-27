@@ -8,7 +8,7 @@
 import Foundation
 import StosOpenSSL
 
-class Certificate {
+public class Certificate {
     let name: String
     let serialNumber: String
     let data: Data?

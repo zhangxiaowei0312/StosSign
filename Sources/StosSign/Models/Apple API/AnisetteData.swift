@@ -7,7 +7,7 @@
 
 import Foundation
 
-class AnisetteData: Codable {
+public class AnisetteData: Codable {
     let machineID: String
     let oneTimePassword: String
     let localUserID: String
@@ -46,7 +46,7 @@ class AnisetteData: Codable {
     }
 
     
-    required init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         self.machineID = try container.decode(String.self, forKey: .machineID)

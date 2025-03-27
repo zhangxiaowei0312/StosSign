@@ -7,12 +7,12 @@
 
 import Foundation
 
-class AppleAPISession {
+public class AppleAPISession {
     var dsid: String
     var authToken: String
     var anisetteData: AnisetteData 
 
-    init(dsid: String, authToken: String, anisetteData: AnisetteData) {
+    public init(dsid: String, authToken: String, anisetteData: AnisetteData) {
         self.dsid = dsid
         self.authToken = authToken
         self.anisetteData = anisetteData

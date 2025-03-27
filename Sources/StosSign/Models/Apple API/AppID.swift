@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AppID { // I wanted to use a Codable struct but for some reason no matter how much i tried it wouldn't work due to the features and enabled Features stuff
+public struct AppID { // I wanted to use a Codable struct but for some reason no matter how much i tried it wouldn't work due to the features and enabled Features stuff
     var name: String
     var identifier: String
     var bundleIdentifier: String
@@ -15,7 +15,7 @@ struct AppID { // I wanted to use a Codable struct but for some reason no matter
     var features: [String: Any]
     var entitlements: [String]
 
-    init(name: String, identifier: String, bundleIdentifier: String, expirationDate: Date?, features: [String: Any]) {
+    public init(name: String, identifier: String, bundleIdentifier: String, expirationDate: Date?, features: [String: Any]) {
         self.name = name
         self.identifier = identifier
         self.bundleIdentifier = bundleIdentifier
@@ -24,7 +24,7 @@ struct AppID { // I wanted to use a Codable struct but for some reason no matter
         self.entitlements = []
     }
 
-    init?(responseDictionary: [String: Any]) {
+    public init?(responseDictionary: [String: Any]) {
         guard let name = responseDictionary["name"] as? String,
               let identifier = responseDictionary["appIdId"] as? String,
               let bundleIdentifier = responseDictionary["identifier"] as? String else {

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AppGroup: Codable {
+public struct AppGroup: Codable {
     var name: String
     var identifier: String
     var groupIdentifier: String

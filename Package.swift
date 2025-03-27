@@ -19,9 +19,18 @@ let package = Package(
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
+            name: "CoreCrypto",
+            path: "Sources/Dependencies/corecrypto",
+            cSettings: [
+                .headerSearchPath("include/corecrypto"),
+                .define("CORECRYPTO_DONOT_USE_TRANSPARENT_UNION=1")
+            ]
+        ),
+        .target(
             name: "StosSign",
             dependencies: [
                  .product(name: "ZSignApple", package: "zsign-ios"),
+                 "CoreCrypto",
                  "StosOpenSSL"
             ]
         ),

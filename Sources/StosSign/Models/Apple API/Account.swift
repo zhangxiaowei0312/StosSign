@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Account: Codable {
+public class Account: Codable {
     let appleID: String
     let identifier: Int
     let firstName: String
@@ -21,7 +21,7 @@ class Account: Codable {
         return PersonNameComponentsFormatter().string(from: components)
     }
     
-    required init(from decoder: Decoder) throws {
+    required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         appleID = try container.decode(String.self, forKey: .appleID)
         identifier = try container.decode(Int.self, forKey: .identifier)

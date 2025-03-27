@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct EntitlementsParser {
+public struct EntitlementsParser {
     private struct MachHeader {
         let magic: UInt32
         let cputype: Int32
