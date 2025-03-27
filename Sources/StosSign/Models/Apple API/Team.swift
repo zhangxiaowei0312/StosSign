@@ -16,10 +16,10 @@ public enum TeamType: Int, Codable {
 
 
 public struct Team {
-    var name: String
-    var identifier: String
-    var type: TeamType
-    var account: Account
+    public var name: String
+    public var identifier: String
+    public var type: TeamType
+    public var account: Account
     
     public init(name: String, identifier: String, type: TeamType, account: Account) {
         self.name = name

@@ -12,27 +12,27 @@ import UIKit
 #endif
 
 
-typealias Entitlement = String
+public typealias Entitlement = String
 
 public class ALTApplication: NSObject {
     // MARK: - Public Properties
     
-    let name: String
-    let bundleIdentifier: String
-    let version: String
-    let buildVersion: String
-    let minimumiOSVersion: OperatingSystemVersion
-    let supportedDeviceTypes: DeviceType
-    let fileURL: URL
-    let bundle: Bundle
+    public let name: String
+    public let bundleIdentifier: String
+    public  let version: String
+    public let buildVersion: String
+    public let minimumiOSVersion: OperatingSystemVersion
+    public let supportedDeviceTypes: DeviceType
+    public let fileURL: URL
+    public let bundle: Bundle
     
     /// Whether the application has private entitlements
-    var hasPrivateEntitlements: Bool = false
+    public var hasPrivateEntitlements: Bool = false
     
     // MARK: - Lazy Properties
     
     /// Dictionary of application entitlements
-    var entitlements: [Entitlement: Any] {
+    public var entitlements: [Entitlement: Any] {
         if let cached = _entitlements {
             return cached
         }
@@ -63,7 +63,7 @@ public class ALTApplication: NSObject {
     }
     
     /// Raw entitlements string
-    var entitlementsString: String {
+    public var entitlementsString: String {
         get throws {
             if let cached = _entitlementsString {
                 return cached
@@ -82,7 +82,7 @@ public class ALTApplication: NSObject {
     }
     
     /// Associated provisioning profile
-    var provisioningProfile: ProvisioningProfile? {
+    public var provisioningProfile: ProvisioningProfile? {
         if let cached = _provisioningProfile {
             return cached
         }
@@ -102,7 +102,7 @@ public class ALTApplication: NSObject {
     }
     
     /// App extensions contained in this application
-    var appExtensions: Set<ALTApplication> {
+    public var appExtensions: Set<ALTApplication> {
         guard let plugInsURL = bundle.builtInPlugInsURL else {
             return []
         }
@@ -123,7 +123,7 @@ public class ALTApplication: NSObject {
     
     #if os(iOS)
     /// The application icon, if available
-    var icon: UIImage? {
+    public var icon: UIImage? {
         guard let iconName = self.iconName else {
             return nil
         }
@@ -141,7 +141,7 @@ public class ALTApplication: NSObject {
     
     // MARK: - Initializers
     
-    init?(fileURL: URL) {
+    public init?(fileURL: URL) {
         guard let bundle = Bundle(url: fileURL) else {
             return nil
         }
@@ -229,10 +229,10 @@ public class ALTApplication: NSObject {
         return infoDictionary["CFBundleIconFile"] as? String
     }
     
-    enum EntitlementError: Error, LocalizedError {
+    public enum EntitlementError: Error, LocalizedError {
         case failedToExtract(Error)
         
-        var errorDescription: String? {
+        public var errorDescription: String? {
             switch self {
             case .failedToExtract(let error):
                 return "Failed to extract entitlements: \(error.localizedDescription)"

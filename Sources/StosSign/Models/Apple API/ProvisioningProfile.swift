@@ -8,19 +8,19 @@
 import Foundation
 
 public struct ProvisioningProfile: Codable {
-    var identifier: String
-    var data: Data
-    var name: String
-    var uuid: UUID
-    var teamIdentifier: String
-    var teamName: String
-    var creationDate: Date
-    var expirationDate: Date
-    var entitlements: [String: AnyCodable]
-    var deviceIDs: [String]
-    var isFreeProvisioningProfile: Bool
-    var bundleIdentifier: String?
-    var certificates: [Data]
+    public var identifier: String
+    public var data: Data
+    public var name: String
+    public var uuid: UUID
+    public var teamIdentifier: String
+    public var teamName: String
+    public var creationDate: Date
+    public var expirationDate: Date
+    public var entitlements: [String: AnyCodable]
+    public var deviceIDs: [String]
+    public var isFreeProvisioningProfile: Bool
+    public var bundleIdentifier: String?
+    public var certificates: [Data]
 
     enum CodingKeys: String, CodingKey {
         case identifier = "provisioningProfileId"
@@ -73,12 +73,12 @@ public struct ProvisioningProfile: Codable {
     }
 }
 
-struct AnyCodable: Codable {
-    let value: Any
+public struct AnyCodable: Codable {
+    public let value: Any
 
-    init(_ value: Any) { self.value = value }
+    public init(_ value: Any) { self.value = value }
 
-    init(from decoder: Decoder) throws {
+    public  init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if let value = try? container.decode(String.self) {
             self.value = value
@@ -93,7 +93,7 @@ struct AnyCodable: Codable {
         }
     }
 
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         switch value {
         case let value as String:

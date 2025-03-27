@@ -8,12 +8,12 @@
 import Foundation
 
 public struct AppID { // I wanted to use a Codable struct but for some reason no matter how much i tried it wouldn't work due to the features and enabled Features stuff
-    var name: String
-    var identifier: String
-    var bundleIdentifier: String
-    var expirationDate: Date?
-    var features: [String: Any]
-    var entitlements: [String]
+    public var name: String
+    public var identifier: String
+    public var bundleIdentifier: String
+    public var expirationDate: Date?
+    public var features: [String: Any]
+    public var entitlements: [String]
 
     public init(name: String, identifier: String, bundleIdentifier: String, expirationDate: Date?, features: [String: Any]) {
         self.name = name

@@ -8,9 +8,9 @@
 import Foundation
 
 public struct AppGroup: Codable {
-    var name: String
-    var identifier: String
-    var groupIdentifier: String
+    public var name: String
+    public var identifier: String
+    public var groupIdentifier: String
     
     public init(name: String, identifier: String, groupIdentifier: String) {
         self.name = name

@@ -8,9 +8,9 @@
 import Foundation
 
 public class AppleAPISession {
-    var dsid: String
-    var authToken: String
-    var anisetteData: AnisetteData 
+    public var dsid: String
+    public var authToken: String
+    public var anisetteData: AnisetteData 
 
     public init(dsid: String, authToken: String, anisetteData: AnisetteData) {
         self.dsid = dsid

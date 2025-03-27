@@ -8,10 +8,10 @@
 import Foundation
 
 public class Account: Codable {
-    let appleID: String
-    let identifier: Int
-    let firstName: String
-    let lastName: String
+    public let appleID: String
+    public let identifier: Int
+    public let firstName: String
+    public let lastName: String
     private var fallbackFirstName: String = ""
     private var fallbackLastName: String = ""
     var name: String {

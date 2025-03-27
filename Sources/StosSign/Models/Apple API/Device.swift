@@ -29,10 +29,10 @@ public enum DeviceType: Int {
 }
 
 public struct Device: Codable {
-    var name: String
-    var identifier: String
-    var type: DeviceType
-    var osVersion: OperatingSystemVersion = .init()
+    public var name: String
+    public var identifier: String
+    public var type: DeviceType
+    public var osVersion: OperatingSystemVersion = .init()
     
     enum CodingKeys: String, CodingKey {
         case name

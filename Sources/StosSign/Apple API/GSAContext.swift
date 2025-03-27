@@ -56,12 +56,12 @@ public func cchmac_di_size(_ digestInfo: UnsafePointer<ccdigest_info>) -> Int {
 }
 
 public class GSAContext {
-    let username: String
-    let password: String
-    var salt: Data?
-    var serverPublicKey: Data?
-    var sessionKey: Data?
-    var dsid: String?
+    public let username: String
+    public let password: String
+    public var salt: Data?
+    public var serverPublicKey: Data?
+    public var sessionKey: Data?
+    public var dsid: String?
     
     private(set) var publicKey: Data?
     private(set) var derivedPasswordKey: Data?

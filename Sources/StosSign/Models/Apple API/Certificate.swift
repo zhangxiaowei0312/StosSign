@@ -9,13 +9,13 @@ import Foundation
 import StosOpenSSL
 
 public class Certificate {
-    let name: String
-    let serialNumber: String
-    let data: Data?
-    var privateKey: Data?
-    var machineName: String?
-    var machineIdentifier: String?
-    var identifier: String?
+    public let name: String
+    public let serialNumber: String
+    public let data: Data?
+    public var privateKey: Data?
+    public var machineName: String?
+    public var machineIdentifier: String?
+    public var identifier: String?
     
     private static let pemPrefix = "-----BEGIN CERTIFICATE-----"
     private static let pemSuffix = "-----END CERTIFICATE-----"
