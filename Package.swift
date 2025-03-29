@@ -16,7 +16,7 @@ let package = Package(
             targets: ["StosOpenSSL", "StosSign"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/MartinLau7/CoreCrypto-SPM", branch: "master"),
+        .package(url: "https://github.com/stossy11/CoreCrypto-SPM", branch: "master"),
         .package(url: "https://github.com/zwsn/zsign-ios.git", branch: "main")
     ],
     targets: [

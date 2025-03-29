@@ -3,10 +3,10 @@
     "pins": [
       {
         "package": "CoreCrypto",
-        "repositoryURL": "https://github.com/MartinLau7/CoreCrypto-SPM",
+        "repositoryURL": "https://github.com/stossy11/CoreCrypto-SPM",
         "state": {
           "branch": "master",
-          "revision": "2be6d45eb32c0057cb680cb5789b825eac0c0798",
+          "revision": "e26af6cff20579944df1661bf5b895eb9d2ae291",
           "version": null
         }
       },
