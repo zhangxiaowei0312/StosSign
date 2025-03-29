@@ -7,6 +7,7 @@
 
 
 import Foundation
+import CommonCrypto
 import CoreCrypto
 #if os(macOS) || os(iOS)
 import UIKit
@@ -125,49 +126,37 @@ public class GSAContext {
     func makeChecksum(appName: String) -> Data? {
         guard let sessionKey = sessionKey, let dsid = dsid else { return nil }
         
-        let size = cchmac_di_size(digestInfo)
-        let context = Data.makeBuffer(size: size, type: cchmac_ctx_t.self)
-        defer { context.deallocate() }
+        var context = CCHmacContext()
+        let algorithm = CCHmacAlgorithm(kCCHmacAlgSHA256)
         
-        sessionKey.withUnsafeBytes {
-            cchmac_init(
-                digestInfo,
-                context.pointee,
-                sessionKey.count,
-                $0.baseAddress
-            )
+        sessionKey.withUnsafeBytes { keyBytes in
+            CCHmacInit(&context, algorithm, keyBytes.baseAddress, sessionKey.count)
         }
         
         for string in ["apptokens", dsid, appName] {
-            cchmac_update(digestInfo, context.pointee, string.count, string)
+            string.withCString { cString in
+                CCHmacUpdate(&context, cString, strlen(cString))
+            }
         }
         
-        var checksum = Data(repeating: 0, count: digestInfo.pointee.output_size)
-        checksum.withUnsafeMutableBytes {
-            cchmac_final(
-                digestInfo,
-                context.pointee,
-                $0.baseAddress?.assumingMemoryBound(to: UInt8.self)
-            )
+        var checksum = Data(repeating: 0, count: Int(CC_SHA256_DIGEST_LENGTH))
+        checksum.withUnsafeMutableBytes { outputBytes in
+            CCHmacFinal(&context, outputBytes.baseAddress)
         }
         
         return checksum
     }
-    
+
     internal func makeHMACKey(_ string: String) -> Data {
+        
         var keySize = 0
         let rawSessionKey = ccsrp_get_session_key(srpContext, &keySize)
         
         var sessionKey = Data(repeating: 0, count: keySize)
-        sessionKey.withUnsafeMutableBytes {
-            cchmac(
-                digestInfo,
-                keySize,
-                rawSessionKey,
-                string.count,
-                string,
-                $0.baseAddress?.assumingMemoryBound(to: UInt8.self)
-            )
+        sessionKey.withUnsafeMutableBytes { sessionKeyBytes in
+            string.withCString { cString in
+                CCHmac(CCHmacAlgorithm(kCCHmacAlgSHA256), rawSessionKey, keySize, cString, strlen(cString), sessionKeyBytes.baseAddress)
+            }
         }
         
         return sessionKey
