@@ -28,9 +28,6 @@ let package = Package(
                 .product(name: "ZSignApple", package: "zsign-ios"),
                 .product(name: "CoreCrypto", package: "CoreCrypto-SPM"),
                 "StosOpenSSL"
-            ],
-            exclude: [
-                "Sources/Dependencies",
             ]
         ),
         .target(
