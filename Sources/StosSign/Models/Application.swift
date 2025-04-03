@@ -14,7 +14,7 @@ import UIKit
 
 public typealias Entitlement = String
 
-public class ALTApplication: NSObject {
+public class Application: NSObject {
     // MARK: - Public Properties
     
     public let name: String
@@ -102,7 +102,7 @@ public class ALTApplication: NSObject {
     }
     
     /// App extensions contained in this application
-    public var appExtensions: Set<ALTApplication> {
+    public var appExtensions: Set<Application> {
         guard let plugInsURL = bundle.builtInPlugInsURL else {
             return []
         }
@@ -110,9 +110,9 @@ public class ALTApplication: NSObject {
         return Set(
             FileManager.default
                 .enumerateContents(at: plugInsURL, options: [.skipsSubdirectoryDescendants])
-                .compactMap { url -> ALTApplication? in
+                .compactMap { url -> Application? in
                     guard url.pathExtension.lowercased() == "appex",
-                          let appExtension = ALTApplication(fileURL: url) else {
+                          let appExtension = Application(fileURL: url) else {
                         return nil
                     }
                     return appExtension

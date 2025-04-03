@@ -17,7 +17,9 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/stossy11/CoreCrypto-SPM", branch: "master"),
+        .package(url: "https://github.com/marmelroy/Zip.git", branch: "master"),
         .package(url: "https://github.com/zwsn/zsign-ios.git", branch: "main")
+        //https://github.com/marmelroy/Zip
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -27,6 +29,7 @@ let package = Package(
             dependencies: [
                 .product(name: "ZSignApple", package: "zsign-ios"),
                 .product(name: "CoreCrypto", package: "CoreCrypto-SPM"),
+                .product(name: "Zip", package: "Zip"),
                 "StosOpenSSL"
             ]
         ),
