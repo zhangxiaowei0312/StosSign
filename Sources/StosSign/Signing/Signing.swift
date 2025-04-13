@@ -149,9 +149,9 @@ func CertificatesContent(certificate: Certificate) -> Data {
     i2d_PKCS12_bio(outputP12Buffer, outputP12)
     
     var buffer: UnsafeMutableRawPointer? = nil
-    let size = bioGetMemData(outputP12Buffer, &buffer)
+    // let size = bioGetMemData(outputP12Buffer, &buffer)
     
-    let p12Data = Data(bytes: buffer!, count: Int(size))
+    // let p12Data = Data(bytes: buffer!, count: Int(size))
     
     PKCS12_free(inputP12)
     PKCS12_free(outputP12)
@@ -162,7 +162,7 @@ func CertificatesContent(certificate: Certificate) -> Data {
     BIO_free(inputP12Buffer)
     BIO_free(outputP12Buffer)
     
-    return p12Data
+    return Data()
 }
 
 
