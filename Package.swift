@@ -13,13 +13,12 @@ let package = Package(
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "StosSign",
-            type: .dynamic,
             targets: ["StosOpenSSL", "StosSign"]),
     ],
     dependencies: [
         .package(url: "https://github.com/stossy11/CoreCrypto-SPM", branch: "master"),
         .package(url: "https://github.com/marmelroy/Zip.git", branch: "master"),
-        .package(url: "https://github.com/zwsn/zsign-ios.git", branch: "main")
+        .package(url: "https://github.com/stossy11/zsign-ios.git", branch: "main")
         //https://github.com/marmelroy/Zip
     ],
     targets: [

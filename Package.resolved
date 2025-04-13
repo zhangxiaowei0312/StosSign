@@ -11,6 +11,15 @@
         }
       },
       {
+        "package": "OpenSSL",
+        "repositoryURL": "https://github.com/krzyzanowskim/OpenSSL-Package.git",
+        "state": {
+          "branch": null,
+          "revision": "71dbe0b4514cdaad95961470db72e8231f5943a6",
+          "version": "3.3.3001"
+        }
+      },
+      {
         "package": "Zip",
         "repositoryURL": "https://github.com/marmelroy/Zip.git",
         "state": {
@@ -21,10 +30,10 @@
       },
       {
         "package": "ZSignApple",
-        "repositoryURL": "https://github.com/zwsn/zsign-ios.git",
+        "repositoryURL": "https://github.com/stossy11/zsign-ios.git",
         "state": {
           "branch": "main",
-          "revision": "a7f275fb4830ea48adf536fcddee7d05471970d0",
+          "revision": "98eecab869b7524473c6e206400e3d784f84de6d",
           "version": null
         }
       }
