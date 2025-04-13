@@ -14,7 +14,6 @@ typealias EVP_PKEY = OpaquePointer
 typealias X509 = OpaquePointer
 typealias BIO = OpaquePointer
 
-
 let AppleRootCertificateData = """
 -----BEGIN CERTIFICATE-----
 MIIEuzCCA6OgAwIBAgIBAjANBgkqhkiG9w0BAQUFADBiMQswCQYDVQQGEwJVUzET
