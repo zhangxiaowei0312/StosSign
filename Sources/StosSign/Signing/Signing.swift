@@ -148,10 +148,10 @@ func CertificatesContent(certificate: Certificate) -> Data {
     let outputP12Buffer = BIO_new(BIO_s_mem())
     i2d_PKCS12_bio(outputP12Buffer, outputP12)
     
-    var buffer: UnsafeMutableRawPointer? = nil
-    // let size = bioGetMemData(outputP12Buffer, &buffer)
+    var buffer: UnsafePointer<UInt8>? = nil
+    let size = BIO_get_mem_data_bridge(outputP12Buffer, &buffer)
     
-    // let p12Data = Data(bytes: buffer!, count: Int(size))
+    let p12Data = Data(bytes: buffer!, count: Int(size))
     
     PKCS12_free(inputP12)
     PKCS12_free(outputP12)
@@ -166,20 +166,20 @@ func CertificatesContent(certificate: Certificate) -> Data {
 }
 
 
-class Signer {
-    let team: Team
-    let certificate: Certificate
+public class Signer {
+    public let team: Team
+    public let certificate: Certificate
     
-    static func load() {
+    public static func load() {
         OpenSSL_add_all_algorithms()
     }
     
-    init(team: Team, certificate: Certificate) {
+    public init(team: Team, certificate: Certificate) {
         self.team = team
         self.certificate = certificate
     }
     
-    func signApp(at appURL: URL, provisioningProfiles profiles: [ProvisioningProfile], completionHandler: @escaping (Bool, Error?) -> Void) -> Progress {
+    public func signApp(at appURL: URL, provisioningProfiles profiles: [ProvisioningProfile], completionHandler: @escaping (Bool, Error?) -> Void) -> Progress {
         let progress = Progress(totalUnitCount: 1)
         var ipaURL: URL?
         var appBundleURL: URL?
@@ -288,11 +288,11 @@ func saveProvisioningProfile(_ profile: ProvisioningProfile) throws -> String {
     return tempURL.path
 }
 
-let SignErrorDomain = "SignErrorDomain"
-let ErrorMissingAppBundle = 1
-let ErrorInvalidApp = 2
-let ErrorMissingProvisioningProfile = 3
-let ErrorUnknown = 4
+public let SignErrorDomain = "SignErrorDomain"
+public let ErrorMissingAppBundle = 1
+public let ErrorInvalidApp = 2
+public let ErrorMissingProvisioningProfile = 3
+public let ErrorUnknown = 4
 
 extension Data {
     var bytes: [UInt8] {
