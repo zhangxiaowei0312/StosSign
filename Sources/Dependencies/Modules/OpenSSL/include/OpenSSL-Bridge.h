@@ -25,7 +25,9 @@
 extern "C" {
 #endif
 
-static inline int bioGetMemData(BIO *bio, void **pp);
+static inline int bioGetMemData(BIO *bio, void **pp) {
+    return BIO_get_mem_data(bio, (char **)pp);
+}
 
 bool parse_p12_data(const unsigned char *p12Data, int p12DataLength,
                    const char *password,
