@@ -121,8 +121,6 @@ public class Application: NSObject {
     }
 
     
-    #if os(iOS)
-    /// The application icon, if available
     public var icon: UIImage? {
         guard let iconName = self.iconName else {
             return nil
@@ -130,7 +128,6 @@ public class Application: NSObject {
         
         return UIImage(named: iconName, in: self.bundle, compatibleWith: nil)
     }
-    #endif
     
     // MARK: - Private Properties
     
