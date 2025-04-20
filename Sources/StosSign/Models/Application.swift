@@ -10,7 +10,9 @@ import ZSign
 #if os(iOS)
 import UIKit
 #endif
-
+#if os(macOS)
+import SwiftUI
+#endif
 
 public typealias Entitlement = String
 
@@ -120,7 +122,7 @@ public class Application: NSObject {
         )
     }
 
-    
+#if os(iOS)
     public var icon: UIImage? {
         guard let iconName = self.iconName else {
             return nil
@@ -128,6 +130,17 @@ public class Application: NSObject {
         
         return UIImage(named: iconName, in: self.bundle, compatibleWith: nil)
     }
+#endif
+    
+#if os(macOS)
+    public var icon: Image? {
+        guard let iconName = self.iconName else {
+            return nil
+        }
+        
+        return Image.init(iconName, bundle: self.bundle)
+    }
+#endif
     
     // MARK: - Private Properties
     
